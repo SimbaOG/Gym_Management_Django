@@ -28,6 +28,7 @@ def main_page(request):
     if log_stat is None or log_name is None:
         return render(request, 'master_login.html')
     else:
+        print("yeah")
         return render(request, 'dashboard.html')
 
 
