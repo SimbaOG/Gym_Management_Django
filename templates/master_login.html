@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gym Management</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/background.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/links.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/loginmodal.css' %}">
+</head>
+<body>
+    <div class="bg-image"></div>
+    <div class="bg-form">
+        <h1 class="gym-log">Gym Login</h1>
+        <form action="dashboard" method="post">
+            {% csrf_token %}
+        <input type="text" name="username" placeholder="Username / Registered E-Mail Address"><br>
+        <input type="password" name="password" placeholder="Password"><br>
+        <button class="button"><span>Login</span></button>
+        </form><br>
+        <a href="/reset-password" style= "text-decoration:none" class="forgot">Forgot your password?</a><br>
+        {% for message in messages %}
+        <div id="FailedModal" class="modal">
+            <div class="failed-modal-content">
+                <div class="failed-modal-header">
+                    <span class="close2">&times;</span>
+                    <h2>Unable to send!</h2>
+                </div>
+                <div class="failed-modal-body">
+                    <p>{{ message }}</p>
+                    <p>Please check your credentials and try again!</p>
+                </div>
+                <div class="failed-modal-footer">
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+<footer>Need an account for managing gym? Contact us at: 12345</footer>
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'js/loginajax.js' %}"></script>
+<script src="{% static 'js/login.js' %}"></script>
+
+</html>

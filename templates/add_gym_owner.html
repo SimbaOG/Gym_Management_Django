@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" xmlns="">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Gym Owner</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/addowner.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/links.css' %}">
+</head>
+<body>
+<div class="bg-image"></div>
+<div class="bg-form">
+    {% csrf_token %}
+    <form id="add-owner" method="post" enctype="text/plain">
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <input type="email" id="email" placeholder="E-mail">
+        <input type="text" id="phnumber" placeholder="Phone Number">
+        <input type="text" id="c_code" placeholder="Country Code">
+        <input type="text" id="loc" placeholder="Location"><br><br>
+<!--        <div class="custom-select">-->
+        <select id="gym_id">
+            {% for data in gymname %}
+            <option value="{{ data.id }}">{{data.id}}: {{ data.gym_name }}</option>
+            {% endfor %}
+        </select><br><br>
+<!--        </div>-->
+        <button class="button"><span>Add Owner</span></button>
+    </form>
+</div>
+</body>
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'js/customselect.js' %}"></script>
+<script src="{% static 'js/adduserajax.js' %}"></script>
+</html>

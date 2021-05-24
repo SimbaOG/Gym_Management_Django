@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reset your password!</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bodydata.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/links.css' %}">
+
+</head>
+<body>
+    <div class="bg-image"></div>
+    <div class="bg-form">
+        <h1 class="reset-font">Reset Password</h1>
+        {% csrf_token %}
+        <form id="page-confirmation" method="post" enctype="text/plain">
+            <input type="text" id="email" placeholder="Enter your registered e-mail address">
+        </form>
+        <p class="back-main"><a style= "text-decoration:none" href="/">Back to login-page</a></p>
+    </div>
+
+    <div id="SuccessModal" class="modal">
+        <div class="success-modal-content">
+            <div class="success-modal-header">
+                <span class="close2">&times;</span>
+                <h2>Password Reset Mail Sent!</h2>
+            </div>
+            <div class="success-modal-body">
+                <p>A password reset mail has been sent at your email address!</p>
+                <p>Don't forget to check the spam folder!</p>
+            </div>
+            <div class="success-modal-footer">
+            </div>
+        </div>
+    </div>
+
+    <div id="FailedModal" class="modal">
+        <div class="failed-modal-content">
+            <div class="failed-modal-header">
+                <span class="close">&times;</span>
+                <h2>Unable to send!</h2>
+            </div>
+            <div class="failed-modal-body">
+                <p>No account which such email exists in our database!</p>
+                <p>Please check the email and try again later!</p>
+            </div>
+            <div class="failed-modal-footer">
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'js/resetajax.js' %}"></script>
+</html>
