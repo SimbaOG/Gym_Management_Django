@@ -1,10 +1,134 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <script src="https://use.fontawesome.com/d7b38539a7.js"></script>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'fontawesome/css/all.css' %}">
 </head>
 <body>
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                    <span class="icon"><i class="fas fa-dumbbell" aria-hidden="true"></i></span>
+                    <span class="title"><h2>Gym Name</h2></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                    <span class="icon"><i class="fas fa-tachometer-alt" aria-hidden="true"></i></span>
+                    <span class="title">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                    <span class="icon"><i class="fas fa-users" aria-hidden="true"></i></span>
+                    <span class="title">Members</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                    <span class="icon"><i class="fas fa-cogs" aria-hidden="true"></i></span>
+                    <span class="title">Account Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                    <span class="icon"><i class="fas fa-exclamation" aria-hidden="true"></i></span>
+                    <span class="title">Help</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                    <span class="icon"><i class="fas fa-sign-out-alt" aria-hidden="true"></i></span>
+                    <span class="title">Sign Out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle" onclick="toggleMenu();"></div>
+                <div class="search">
+                    <label>
+                        <input type="text" placeholder="Search">
+                        <i class="fas fa-search"></i>
+                    </label>
+                </div>
+                <div class="user">
+                    <img src="https://i.ibb.co/ypgBv3v/icon.jpg">
+                </div>
+            </div>
+
+            <div class="cardBox">
+                <div class="card">
+                    <div>
+                        <div class="numbers">1,042</div>
+                        <div class="cardName">New Entry's Today</div>
+                    </div>
+                    <div class="iconBox">
+                        <i class="fas fa-signal"></i>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers">178</div>
+                        <div class="cardName">Today's Attendance</div>
+                    </div>
+                    <div class="iconBox">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="details">
+                <div class="staffMembers">
+                    <div class="cardHeader">
+                        <h2>Staff Members</h2>
+                        <a href="#" class="btn">View All</a>
+                    </div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <td>Name</td>
+                            <td>Salary</td>
+                            <td>Joining Date</td>
+                            <td>Designation</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>John Jacob</td>
+                            <td>$ 1,200</td>
+                            <td>26-05-20201</td>
+                            <td><span class="status trainer">Trainer</span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="recentMembers">
+                    <div class="cardHeader">
+                    <h2>Recent Members</h2>
+                    </div>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td width="60px"><div class="imgBox"><img src="icon.png"></div></td>
+                            <td><h4>Ramesh<br><span>Italy</span></h4></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
 </body>
 </html>
+<script src="{% static 'js/menu.js' %}"></script>

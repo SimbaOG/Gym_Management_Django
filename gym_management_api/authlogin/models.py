@@ -38,6 +38,13 @@ class GymData(models.Model):
 
 class UserProfiles(models.Model):
 
+    STAFF_CHOICES = (
+        ("TRAINER", "TRAINER"),
+        ("PTRAINER", "PTRAINER"),
+        ("ACCOUNTANT", "ACCOUNTANT"),
+        ("CLEANING", "CLEANING")
+    )
+
     username = models.TextField(null=False)
     password = models.TextField(null=False)
     email = models.TextField(null=False)
@@ -48,6 +55,8 @@ class UserProfiles(models.Model):
     gym_id = models.ForeignKey(GymData, models.CASCADE, null=True)
     last_login_ip = models.GenericIPAddressField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    is_gym_staff = models.BooleanField(default=False)
+    staff_role = models.CharField(null=True, choices=STAFF_CHOICES, max_length=12)
 
     def __str__(self):
         return self.username

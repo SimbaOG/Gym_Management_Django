@@ -25,11 +25,12 @@ def main_page(request):
     log_stat = request.COOKIES.get('UserLogged')
     log_name = request.COOKIES.get('UID')
 
-    if log_stat is None or log_name is None:
+    if log_stat is None or log_name is None or log_stat is False:
+        print("Case 1 called")
         return render(request, 'master_login.html')
     else:
-        print("yeah")
-        return render(request, 'dashboard.html')
+        print("Case-2 Called") # TODO: ADD DYNAMIC DATA QUERY
+        return redirect('/dashboard')
 
 
 def load_pass_reset(request):
@@ -108,7 +109,7 @@ def deactivate_token(tokenid):
 def auth_master(request):
 
     if not request.user.is_superuser:
-        return HttpResponseForbidden("Not Valid!")
+        return render(request, 'error.html')
     else:
         gym_names = GymData.objects.raw('''SELECT * FROM authlogin_gymdata''')
         # print(gym_names[0].gym_name)
@@ -150,22 +151,40 @@ def register_owner(request):
 
 def auth_login_user(request):
 
+    logged = request.COOKIES.get('UserLogged')
+    u_uid = request.COOKIES.get('UID')
+
+    if logged is not False and u_uid is not None:
+        print("cookies called")  # TODO: ADD DYNAMIC DATA QUERY
+        return render(request, 'dashboard.html')
+
     if request.method == 'POST':
 
         username = request.POST.get('username', None)
         password = request.POST.get('password', None)
+        remem = request.POST.get('keepsign', None)
 
         if UserProfiles.objects.filter(username=username).exists():
             get_user_profile = UserProfiles.objects.get(username=username)
             user_saved_password = get_user_profile.password
 
             u_salt, u_key = decode_pass(user_saved_password)
-
             if compare_passwords(u_salt, u_key, password):
                 print("User Logged-In!")
-                response = render(request, 'dashboard.html')
-                response.set_cookie('UserLogged', True, max_age=settings.SESSION_COOKIE_AGE)
-                response.set_cookie('UID', get_user_profile.id, max_age=settings.SESSION_COOKIE_AGE)
+
+                gym_members = UserProfiles.objects.filter(gym_id_id=get_user_profile.gym_id, is_gym_staff=False,
+                                                          is_owner=False)  # number of gym members
+                gym_staff = UserProfiles.objects.filter(gym_id_id=get_user_profile.gym_id, is_gym_staff=True,
+                                                        is_owner=False)
+
+                response = render(request, 'dashboard.html', {'gmem': gym_members, 'gstaff': gym_staff})
+
+                if remem is None:
+                    response.set_cookie('UserLogged', True, max_age=settings.SESSION_COOKIE_AGE)
+                    response.set_cookie('UID', get_user_profile.id, max_age=settings.SESSION_COOKIE_AGE)
+                else:
+                    response.set_cookie('UserLogged', True)
+                    response.set_cookie('UID', get_user_profile.id)
                 return response
             else:
                 print("Credentials Error!")
@@ -181,8 +200,12 @@ def auth_login_user(request):
             if compare_passwords(u_salt, u_key, password):
                 print("User Logged-In!")
                 response = render(request, 'dashboard.html')
-                response.set_cookie('UserLogged', True, max_age=settings.SESSION_COOKIE_AGE)
-                response.set_cookie('UID', get_user_profile.id, max_age=settings.SESSION_COOKIE_AGE)
+                if remem is None:
+                    response.set_cookie('UserLogged', True, max_age=settings.SESSION_COOKIE_AGE)
+                    response.set_cookie('UID', get_user_profile.id, max_age=settings.SESSION_COOKIE_AGE)
+                else:
+                    response.set_cookie('UserLogged', True)
+                    response.set_cookie('UID', get_user_profile.id)
                 return response
             else:
                 print("Credentials Error!")
@@ -192,3 +215,7 @@ def auth_login_user(request):
         else:
             messages.error(request, 'Username or Password incorrect')
             return redirect('/')
+
+    if logged is False or logged is None or u_uid is None:
+        print('redirect to main page')
+        return redirect('/')

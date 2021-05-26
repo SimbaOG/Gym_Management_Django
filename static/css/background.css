@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Dancing+Script&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
+
 body{
     height: 100%;
     margin: 0;
@@ -216,4 +218,11 @@ html {
     opacity: 1;
     background-color: rgba(0,0,0,0.6);
   }
-  
+
+  .checker {
+    font-family: 'Ubuntu';
+    font-style: normal;
+    font-size: 14px;
+    font-display: swap;
+    color: white;
+  }
