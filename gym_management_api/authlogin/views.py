@@ -177,6 +177,9 @@ def auth_login_user(request):
                 gym_staff = UserProfiles.objects.filter(gym_id_id=get_user_profile.gym_id, is_gym_staff=True,
                                                         is_owner=False)
 
+                print(gym_members)
+                print(gym_staff)
+
                 response = render(request, 'dashboard.html', {'gmem': gym_members, 'gstaff': gym_staff})
 
                 if remem is None:
