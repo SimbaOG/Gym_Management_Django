@@ -147,6 +147,8 @@ def register_owner(request):
 
         else:
             return HttpResponseBadRequest('')
+    else:
+        return HttpResponseBadRequest('')
 
 
 def auth_login_user(request):
@@ -179,6 +181,8 @@ def auth_login_user(request):
 
                 print(gym_members)
                 print(gym_staff)
+                print(len(gym_members))
+                print(len(gym_staff))
 
                 response = render(request, 'dashboard.html', {'gmem': gym_members, 'gstaff': gym_staff})
 

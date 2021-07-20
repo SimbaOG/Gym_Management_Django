@@ -40,7 +40,7 @@ class UserProfiles(models.Model):
 
     STAFF_CHOICES = (
         ("TRAINER", "TRAINER"),
-        ("PTRAINER", "PTRAINER"),
+        ("PTRAIN", "PTRAIN"),
         ("ACCOUNTANT", "ACCOUNTANT"),
         ("CLEANING", "CLEANING")
     )
@@ -57,6 +57,7 @@ class UserProfiles(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     is_gym_staff = models.BooleanField(default=False)
     staff_role = models.CharField(null=True, choices=STAFF_CHOICES, max_length=12)
+    full_person_name = models.TextField()
 
     def __str__(self):
         return self.username

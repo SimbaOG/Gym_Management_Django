@@ -102,12 +102,14 @@
                         </tr>
                         </thead>
                         <tbody>
+                        {% for staff in gmem %}
                         <tr>
-                            <td>John Jacob</td>
-                            <td>$ 1,200</td>
-                            <td>26-05-20201</td>
+                            <td>staff.full_person_name</td>
+                            <td>staff.salary</td>
+                            <td>staff.date</td>
                             <td><span class="status trainer">Trainer</span></td>
                         </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
